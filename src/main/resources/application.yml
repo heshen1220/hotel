@@ -1,0 +1,23 @@
+
+
+spring:
+  application:
+    name: hotel-backstage
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    name: defaultDataSource
+    password: 929686169
+    url: jdbc:mysql://localhost:3306/hotel?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=CTT
+    username: root
+mybatis:
+  mapper-locations: classpath:mapper/*xml
+  type-aliases-package: com.heshen.entity
+server:
+  servlet.context-path:
+  port: 8090
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

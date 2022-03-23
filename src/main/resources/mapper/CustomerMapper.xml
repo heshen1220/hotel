@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heshen.mapper.CustomerMapper">
+
+    <resultMap id="Customer" type="com.heshen.entity.Customer">
+        <id column="Gno" property="Gno"/>
+        <result column="name" property="name"/>
+        <result column="sex" property="sex"/>
+        <result column="id" property="id"/>
+        <result column="tel" property="tel"/>
+        <result column="address" property="address"/>
+        <result column="preference" property="preference"/>
+    </resultMap>
+    <select id="getCustomer" parameterType="com.heshen.entity.Customer" resultMap="Customer">
+        select * from customer
+        <where>
+            <if test="name!=null and name!=''">
+                and name=#{name}
+            </if>
+            <if test="sex!=null and sex!=''">
+                and sex=#{sex}
+            </if>
+            <if test="id!=null and id!=''">
+                and id=#{id}
+            </if>
+            <if test="tel!=null and tel!=''">
+                and tel=#{tel}
+            </if>
+            <if test="address!=null and address!=''">
+                and address=#{address}
+            </if>
+        </where>
+    </select>
+
+</mapper>
