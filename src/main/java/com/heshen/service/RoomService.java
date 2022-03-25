@@ -18,13 +18,14 @@ public class RoomService {
     public ResultBody getRoom(int pageNum, int pageSize,Room room){
         PageHelper.startPage(pageNum, pageSize);
         List<Room> GuestroomList = guestroomMapper.getRoom(room);
-        PageInfo<Room> pageResult = new PageInfo<Room>(GuestroomList);
+        PageInfo<Room> pageResult = new PageInfo<>(GuestroomList);
         return ResultBody.success(pageResult);
     }
     public ResultBody getRoomType(int pageNum, int pageSize,Room room){
         PageHelper.startPage(pageNum, pageSize);
         List<RoomType> GuestroomList = guestroomMapper.getRoomType(room);
-        PageInfo<RoomType> pageResult = new PageInfo<RoomType>(GuestroomList);
+        PageInfo<RoomType> pageResult = new PageInfo<>(GuestroomList);
         return ResultBody.success(pageResult);
     }
+
 }
