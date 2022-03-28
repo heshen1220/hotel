@@ -14,18 +14,31 @@ import java.util.List;
 @Service
 public class RoomService {
     @Autowired
-    RoomMapper guestroomMapper;
+    RoomMapper mapper;
     public ResultBody getRoom(int pageNum, int pageSize,Room room){
         PageHelper.startPage(pageNum, pageSize);
-        List<Room> GuestroomList = guestroomMapper.getRoom(room);
+        List<Room> GuestroomList = mapper.getRoom(room);
         PageInfo<Room> pageResult = new PageInfo<>(GuestroomList);
         return ResultBody.success(pageResult);
     }
     public ResultBody getRoomType(int pageNum, int pageSize,Room room){
         PageHelper.startPage(pageNum, pageSize);
-        List<RoomType> GuestroomList = guestroomMapper.getRoomType(room);
+        List<RoomType> GuestroomList = mapper.getRoomType(room);
         PageInfo<RoomType> pageResult = new PageInfo<>(GuestroomList);
         return ResultBody.success(pageResult);
+    }
+    public ResultBody setRoom(Room room){
+        room.setState("空房");
+        mapper.setRoom(room);
+        return ResultBody.success();
+    }
+    public ResultBody updateRoom(Room room){
+        mapper.updateRoom(room);
+        return ResultBody.success();
+    }
+    public ResultBody deleteRoom(String uuid){
+        mapper.deleteRoom(uuid);
+        return ResultBody.success();
     }
 
 }

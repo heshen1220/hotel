@@ -4,16 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.heshen.mapper.RoomMapper">
 
-    <!--<resultMap id="Guestroom" type="com.heshen.entity.Room">
-        <result column="floor" property="floor"/>
-        <result column="number" property="number"/>
-        <result column="area" property="area"/>
-        <result column="type" property="type"/>
-        <result column="people" property="people"/>
-        <result column="state" property="state"/>
-        <result column="price" property="price"/>
-        <result column="memo" property="memo"/>
-    </resultMap>-->
     <select id="getRoom" parameterType="com.heshen.entity.Room" resultType="Room">
         select * from room
         <where>
@@ -28,4 +18,16 @@
     <select id="getRoomType" parameterType="com.heshen.entity.Room" resultType="com.heshen.entity.RoomType">
     SELECT DISTINCT TYPE,AREA,people,COUNT(TYPE) num,price,memo FROM room GROUP BY TYPE
 </select>
+    <insert id="setRoom" parameterType="com.heshen.entity.Room">
+        insert into room(number,area,type,people,state,price,memo)
+        value (#{number},#{area},#{type},#{people},#{state},#{price},#{memo})
+    </insert>
+
+    <update id="updateRoom" parameterType="com.heshen.entity.Room">
+        update room set number=#{number},area=#{area},type=#{type},people=#{people},state=#{state},price=#{price},memo=#{memo}
+        where uuid=#{uuid}
+    </update>
+    <delete id="deleteRoom" parameterType="java.lang.String">
+        DELETE FROM room WHERE uuid = #{uuid}
+    </delete>
 </mapper>

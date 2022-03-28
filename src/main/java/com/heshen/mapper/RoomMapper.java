@@ -13,4 +13,9 @@ import java.util.List;
 public interface RoomMapper {
     List<Room> getRoom(Room room);
     List<RoomType> getRoomType(Room room);
+    void setRoom(Room room);
+
+    void updateRoom(Room room);
+
+    void deleteRoom(String uuid);
 }

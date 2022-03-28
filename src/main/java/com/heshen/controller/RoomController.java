@@ -26,4 +26,16 @@ public class RoomController {
                                    Room room){
         return service.getRoomType(pageNum,pageSize,room);
     }
+    @PostMapping("/setRoom")
+    public ResultBody setRoom(Room room){
+        return service.setRoom(room);
+    }
+    @PostMapping("/updateRoom")
+    public ResultBody updateRoom(Room room){
+        return service.updateRoom(room);
+    }
+    @PostMapping("/deleteRoom")
+    public ResultBody deleteRoom(String uuid){
+        return service.deleteRoom(uuid);
+    }
 }

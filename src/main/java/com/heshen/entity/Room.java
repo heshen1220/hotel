@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Room {
-    private Integer floor;
+    private Integer uuid;
     private Integer number;
     private Integer area;
     private String type;
