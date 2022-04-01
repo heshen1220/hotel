@@ -9,6 +9,9 @@
         value (#{name},#{phone},#{certificates},#{id},#{room},#{deposit},#{timeIn},#{timeOut},#{memo})
     </insert>
     <select id="getReception" resultType="com.heshen.entity.Reception">
-        select name,phone,id,room,deposit,memo,timeIn,timeOut from reception ORDER by uuid desc
+        select uuid,name,phone,id,room,deposit,memo,timeIn,timeOut from reception ORDER by uuid desc
     </select>
+    <update id="stateChange" parameterType="com.heshen.entity.Reception">
+        update reception set memo=#{memo} where uuid=#{uuid}
+    </update>
 </mapper>

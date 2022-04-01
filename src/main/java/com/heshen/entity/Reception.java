@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class Reception{
+    private String uuid;
     private String name;
     private String phone;
     private String certificates="居民身份证";

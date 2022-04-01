@@ -14,4 +14,5 @@ public interface ReceptionMapper {
     List<Reception> getReception();
 
 
+    void stateChange(Reception reception);
 }

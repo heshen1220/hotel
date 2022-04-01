@@ -24,4 +24,8 @@ public class ReceptionController {
                                    ) {
         return service.getReception(pageNum,pageSize);
     }
+    @PostMapping("/stateChange")
+    public ResultBody stateChange(Reception reception){
+        return service.stateChange(reception);
+    }
 }

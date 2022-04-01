@@ -19,6 +19,7 @@ public class ReceptionService {
     ReceptionMapper mapper;
 
     public ResultBody setReception(Reception reception){
+        if (reception.getTime()==null){return ResultBody.error("起始时间为空");}
         String[] split = reception.getTime().split(",");
         String[] s1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(split[0])).split(" ");
         reception.setTimeIn(s1[0]+" 15:00:00");
@@ -32,5 +33,10 @@ public class ReceptionService {
         List<Reception> ReceptionList = mapper.getReception();
         PageInfo<Reception> pageResult = new PageInfo<>(ReceptionList);
         return ResultBody.success(pageResult);
+    }
+
+    public ResultBody stateChange(Reception reception) {
+        mapper.stateChange(reception);
+        return ResultBody.success();
     }
 }

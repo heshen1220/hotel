@@ -4,6 +4,7 @@ import com.heshen.config.ResultBody;
 import com.heshen.dto.Check;
 import com.heshen.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,5 +23,9 @@ public class StaffController {
     @PostMapping("/check")
     public ResultBody check(Check check, HttpServletRequest httpServletRequest){
         return service.check(check ,httpServletRequest);
+    }
+    @GetMapping("/login")
+    public ResultBody login(){
+        return ResultBody.success();
     }
 }
