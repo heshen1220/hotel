@@ -28,4 +28,8 @@ public class StaffController {
     public ResultBody login(){
         return ResultBody.success();
     }
+    @GetMapping("/administrators")
+    public ResultBody administrators(){
+        return service.administrators();
+    }
 }

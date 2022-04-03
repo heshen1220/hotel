@@ -16,7 +16,7 @@
         </where>
     </select>
     <select id="getRoomType" parameterType="com.heshen.entity.Room" resultType="com.heshen.entity.RoomType">
-    SELECT DISTINCT TYPE,AREA,people,COUNT(TYPE) num,price,memo FROM room GROUP BY TYPE
+    SELECT DISTINCT TYPE,AREA,people,COUNT(TYPE) num,price,memo FROM room GROUP BY TYPE ORDER BY TYPE
 </select>
     <insert id="setRoom" parameterType="com.heshen.entity.Room">
         insert into room(number,area,type,people,state,price,memo)
@@ -30,4 +30,11 @@
     <delete id="deleteRoom" parameterType="java.lang.String">
         DELETE FROM room WHERE uuid = #{uuid}
     </delete>
+    <update id="updateRoomState" parameterType="com.heshen.entity.Room">
+        update room set state = #{state} where number=#{number}
+    </update>
+
+    <select id="getStateRoom" resultType="com.heshen.entity.RoomType">
+        SELECT DISTINCT type,area,people,COUNT(type) num,price,memo FROM room WHERE state='空房' GROUP BY TYPE ORDER BY TYPE
+    </select>
 </mapper>

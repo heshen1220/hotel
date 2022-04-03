@@ -38,4 +38,8 @@ public class RoomController {
     public ResultBody deleteRoom(String uuid){
         return service.deleteRoom(uuid);
     }
+    @PostMapping("/updateRoomState")
+    public ResultBody updateRoomState(Room room){
+        return service.updateRoomState(room);
+    }
 }

@@ -23,7 +23,7 @@ public class RoomService {
     }
     public ResultBody getRoomType(int pageNum, int pageSize,Room room){
         PageHelper.startPage(pageNum, pageSize);
-        List<RoomType> GuestroomList = mapper.getRoomType(room);
+        List<RoomType> GuestroomList = mapper.getRoomType();
         PageInfo<RoomType> pageResult = new PageInfo<>(GuestroomList);
         return ResultBody.success(pageResult);
     }
@@ -41,4 +41,8 @@ public class RoomService {
         return ResultBody.success();
     }
 
+    public ResultBody updateRoomState(Room room) {
+        mapper.updateRoomState(room);
+        return ResultBody.success();
+    }
 }

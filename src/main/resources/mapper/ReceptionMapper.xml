@@ -12,6 +12,16 @@
         select uuid,name,phone,id,room,deposit,memo,timeIn,timeOut from reception ORDER by uuid desc
     </select>
     <update id="stateChange" parameterType="com.heshen.entity.Reception">
-        update reception set memo=#{memo} where uuid=#{uuid}
+        update reception set memo=#{memo},entry=#{name} where uuid=#{uuid}
     </update>
+    
+    <select id="orderChart" resultType="com.heshen.entity.OrderChat">
+        SELECT
+            DATE_FORMAT(timeIn,'%Y-%m-%d') AS TIME,
+        COUNT(*) AS COUNT,
+        SUM(entry) AS totalPrice
+        FROM reception
+        WHERE timeIn>='2022-04-01'
+        GROUP BY TIME ORDER BY TIME;
+    </select>
 </mapper>

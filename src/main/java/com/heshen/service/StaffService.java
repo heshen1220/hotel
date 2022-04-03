@@ -41,4 +41,9 @@ public class StaffService {
         staff.setToken(TokenUtils.getToken(staff.getPhone(),ipAddress));
         return ResultBody.success(staff);
     }
+
+    public ResultBody administrators() {
+        List<Staff> staff = mapper.getStaff();
+        return ResultBody.success(staff.size());
+    }
 }

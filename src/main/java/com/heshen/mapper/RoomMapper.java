@@ -12,10 +12,13 @@ import java.util.List;
 @Mapper
 public interface RoomMapper {
     List<Room> getRoom(Room room);
-    List<RoomType> getRoomType(Room room);
+    List<RoomType> getRoomType();
     void setRoom(Room room);
 
     void updateRoom(Room room);
 
     void deleteRoom(String uuid);
+
+    void updateRoomState(Room room);
+    List<RoomType> getStateRoom();
 }
