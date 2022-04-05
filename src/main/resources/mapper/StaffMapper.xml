@@ -4,11 +4,31 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.heshen.mapper.StaffMapper">
 
-    <select id="getStaff"  resultType="com.heshen.entity.Staff">
+    <select id="getStaff"  parameterType="com.heshen.entity.Staff" resultType="com.heshen.entity.Staff">
         select * from staff
+        <where>
+            <if test="name!=null and name!=''">
+                and name=#{name}
+            </if>
+            <if test="id!=null and id!=''">
+                and id=#{id}
+            </if>
+        </where>
     </select>
     <select id="getStaffByPhone" parameterType="java.lang.String" resultType="com.heshen.entity.Staff">
         select * from staff where phone=#{phone}
     </select>
+
+    <insert id="addStaff" parameterType="com.heshen.entity.Staff">
+        insert into staff(name,id,phone,position,password)
+        value (#{name},#{id},#{phone},#{position},#{password})
+    </insert>
+    <update id="updatePassword" parameterType="com.heshen.entity.Staff">
+        update staff set password=#{password}
+        where id=#{id}
+    </update>
+    <delete id="deleteStaff" parameterType="com.heshen.entity.Staff">
+        DELETE FROM staff WHERE id = #{id}
+    </delete>
 
 </mapper>

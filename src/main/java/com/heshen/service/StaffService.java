@@ -7,6 +7,7 @@ import com.heshen.Utils.ShaUtils;
 import com.heshen.Utils.TokenUtils;
 import com.heshen.config.ResultBody;
 import com.heshen.dto.Check;
+import com.heshen.dto.PassWord;
 import com.heshen.entity.Staff;
 import com.heshen.mapper.StaffMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,9 @@ public class StaffService {
     @Autowired
     StaffMapper mapper;
 
-    public ResultBody getStaff(int pageNum, int pageSize){
+    public ResultBody getStaff(int pageNum, int pageSize,Staff staff){
         PageHelper.startPage(pageNum, pageSize);
-        List<Staff> GuestroomList = mapper.getStaff();
+        List<Staff> GuestroomList = mapper.getStaff(staff);
         PageInfo<Staff> pageResult = new PageInfo<>(GuestroomList);
         return ResultBody.success(pageResult);
     }
@@ -43,7 +44,36 @@ public class StaffService {
     }
 
     public ResultBody administrators() {
-        List<Staff> staff = mapper.getStaff();
+        List<Staff> staff = mapper.getStaff(new Staff());
         return ResultBody.success(staff.size());
+    }
+
+    public ResultBody addStaff(Staff staff) {
+        ShaUtils utils = new ShaUtils();
+        staff.setPassword(utils.SHA(staff.getPassword()));
+        mapper.addStaff(staff);
+        return ResultBody.success();
+    }
+
+    public ResultBody updatePassword(PassWord passWord) {
+        ShaUtils utils = new ShaUtils();
+        Staff staff =new Staff();
+        staff.setId(passWord.getId());
+        List<Staff> staff1 = mapper.getStaff(staff);
+        if (staff1.size()==0){
+            return ResultBody.error("无此用户ID");
+        }
+        String sha = utils.SHA(passWord.getPassword());
+        if (!staff1.get(0).getPassword().equals(utils.SHA(passWord.getPassword()))){
+            return ResultBody.error("密码输入错误");
+        }
+        staff.setPassword(utils.SHA(passWord.getNewPassword()));
+        mapper.updatePassword(staff);
+        return ResultBody.success();
+    }
+
+    public ResultBody deleteStaff(Staff staff) {
+        mapper.deleteStaff(staff);
+        return ResultBody.success();
     }
 }

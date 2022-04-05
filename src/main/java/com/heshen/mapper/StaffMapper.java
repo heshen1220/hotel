@@ -10,7 +10,13 @@ import java.util.List;
 @Repository
 @Mapper
 public interface StaffMapper {
-    List<Staff> getStaff();
+    List<Staff> getStaff(Staff staff);
 
     Staff getStaffByPhone(String phone);
+
+    void addStaff(Staff staff);
+
+    void updatePassword(Staff staff);
+
+    void deleteStaff(Staff staff);
 }
