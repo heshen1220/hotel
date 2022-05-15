@@ -2,7 +2,7 @@ package com.heshen.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.heshen.Utils.IPUtils;
+import com.heshen.Utils.IpUtils;
 import com.heshen.Utils.ShaUtils;
 import com.heshen.Utils.TokenUtils;
 import com.heshen.config.ResultBody;
@@ -10,15 +10,14 @@ import com.heshen.dto.Check;
 import com.heshen.dto.PassWord;
 import com.heshen.entity.Staff;
 import com.heshen.mapper.StaffMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Service
 public class StaffService {
-    @Autowired
+    @Resource
     StaffMapper mapper;
 
     public ResultBody getStaff(int pageNum, int pageSize,Staff staff){
@@ -38,7 +37,7 @@ public class StaffService {
         if (sha==null||sha.length()<1||!sha.equals(staff.getPassword())){
             return ResultBody.error("400","账号或密码错误");
         }
-        String ipAddress = IPUtils.getVisitorIp(httpServletRequest);
+        String ipAddress = IpUtils.getVisitorIp(httpServletRequest);
         staff.setToken(TokenUtils.getToken(staff.getPhone(),ipAddress));
         return ResultBody.success(staff);
     }
@@ -63,7 +62,6 @@ public class StaffService {
         if (staff1.size()==0){
             return ResultBody.error("无此用户ID");
         }
-        String sha = utils.SHA(passWord.getPassword());
         if (!staff1.get(0).getPassword().equals(utils.SHA(passWord.getPassword()))){
             return ResultBody.error("密码输入错误");
         }

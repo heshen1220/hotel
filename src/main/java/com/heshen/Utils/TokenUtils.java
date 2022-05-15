@@ -11,9 +11,9 @@ import java.util.Map;
 public class TokenUtils {
     private static String secrete = "1234567890";
     public static String getToken(String phone,String secrete){
-        String token = JWT.create()//链式编程创建JWTCreator
-                .withClaim("phone", phone)//存放 payload 数据
-                .sign(Algorithm.HMAC256(secrete)); //使用secrete对称加密生成 signature
+        String token = JWT.create()
+                .withClaim("phone", phone)
+                .sign(Algorithm.HMAC256(secrete));
         return  token;
     }
 

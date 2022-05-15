@@ -2,7 +2,10 @@ package com.heshen.Utils;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class IPUtils {
+/**
+ * @author 92968
+ */
+public class IpUtils {
     public static String getVisitorIp(HttpServletRequest request) {
         String remoteAddr = request.getRemoteAddr();
         String forwarded = request.getHeader("X-Forwarded-For");

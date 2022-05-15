@@ -1,12 +1,7 @@
 package com.heshen.interceptor;
 
 import com.alibaba.fastjson.JSONObject;
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.JWTDecodeException;
-import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.heshen.Utils.IPUtils;
+import com.heshen.Utils.IpUtils;
 import com.heshen.Utils.TokenUtils;
 import com.heshen.entity.Staff;
 import com.heshen.mapper.StaffMapper;
@@ -30,12 +25,14 @@ public class MyInterceptorConfig implements HandlerInterceptor {
     @Autowired
     StaffMapper staffMapper;
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request,
+                             HttpServletResponse response,
+                             Object handler) throws Exception {
         String token = request.getHeader("token");
         if(token==null||token==""){
            return err(response,"请先登录!");
         }
-        String ipAddress = IPUtils.getVisitorIp(request);
+        String ipAddress = IpUtils.getVisitorIp(request);
         try {
 
             Map<String, String> map = TokenUtils.parseToken(token, ipAddress);
